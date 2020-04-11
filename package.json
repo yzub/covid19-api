@@ -1,0 +1,26 @@
+{
+  "name": "covid19-api",
+  "version": "1.0.0",
+  "description": "RESTful API Server",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon server.js"
+  },
+  "author": "Yusuf",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yzub/covid19-api.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yzub/covid19-api/issues"
+  },
+  "homepage": "https://github.com/yzub/covid19-api#readme"
+}
