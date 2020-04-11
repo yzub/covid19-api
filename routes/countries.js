@@ -1,7 +1,7 @@
 const countryRoutes = (app, fs) => {
 
     // variables
-    const dataPath = 'https://github.com/pomber/covid19/blob/master/docs/timeseries.json';
+    const dataPath = './data/timeseries.json';
 
     // READ
     app.get('/countries', (req, res) => {
