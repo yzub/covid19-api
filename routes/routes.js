@@ -1,5 +1,4 @@
-// load up our shiny new route for users
-const userRoutes = require('./countries');
+const countryRoutes = require('./countries.js');
 
 const appRouter = (app, fs) => {
 
@@ -9,8 +8,8 @@ const appRouter = (app, fs) => {
         res.send('welcome to the development api-server');
     });
 
-    // run our user route module here to complete the wire up
-    userRoutes(app, fs);
+    // run our country route module
+    countryRoutes(app, fs);
 };
 
 // this line is unchanged
