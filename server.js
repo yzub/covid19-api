@@ -1,30 +1,32 @@
-// load up the express framework and body-parser helper
-const express = require('express');
-const bodyParser = require('body-parser');
-const cron = require('node-cron');
-const getData = require('./utils/get-data');
-
-// create an instance of express to serve our end points
+const express = require("express");
+const bodyParser = require("body-parser");
+const cron = require("node-cron");
+const cors = require("cors");
+const updateData = require("./utils/update-data");
+const path = require("path");
 const app = express();
 
-// we'll load up node's built in file system helper library here
-// (we'll be using this later to serve our JSON files
-const fs = require('fs');
-
-// Cron job 8am every morning
-// Use * * * * * to run every minute for testing
-cron.schedule("0 8 * * *", () => getData());
-
-// configure our express instance with some body-parser settings 
-// including handling JSON data
+app.use(
+  cors({
+    origin: ["https://localhost:3000", "http://yourapp.com"],
+  })
+);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// this is where we'll handle our various routes from
-const routes = require('./routes/routes.js')(app, fs);
-
-// finally, launch our server on port 3001.
-const server = app.listen(3001, () => {
-    console.log('listening on port %s...', server.address().port);
+app.get("/", (req, res) => {
+  res.status(200).send("Welcome to our restful API");
 });
 
+app.get("/global", (req, res) => {
+  res.header("Content-Type", "application/json");
+  res.sendFile(path.join(__dirname, "data/global.json"));
+});
+
+// Cron job @ 00:05 everyday
+// Use * * * * * to run every minute for testing
+cron.schedule("00 05 * * *", () => updateData());
+
+const server = app.listen(3001, () => {
+  console.log("listening on port %s...", server.address().port);
+});
